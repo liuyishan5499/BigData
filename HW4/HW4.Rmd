@@ -1,0 +1,49 @@
+---
+title: "Data Regression"
+author: "Yishan Liu"
+date: "November 1, 2015"
+output: word_document
+---
+#Data Analysis about Ozone Data
+##Read the data
+```{r}
+setwd(setwd("/Users/Gracie/Dropbox/BigData"))
+mydata<-read.csv("ozone_data.csv")
+```
+##Create Linear Regression Model 
+```{r}
+summary(lm(Ozone~Temp+Wind,data=mydata))
+```
+From the summary we get regression model is as follows:
+
+**$Ozone=-67.3220+1.8276Temp-3.2948Wind$**
+
+The $R^{2}$ value is 0.5611, it is a fair but not a very good model.
+
+##Explore the data by drawing correlation plot and calculate Pearson's correlation coefficient
+```{r}
+pairs(mydata)
+cor(mydata)
+```
+From the plot and the correlation value, we could see that Wind and Temp have relative greater effects on Ozone value. 
+Let's try another model add predictor Temp*Wind
+```{r}
+summary(model1<-lm(Ozone~Temp+Wind+Temp*Wind,data=mydata))
+```
+We could see that we had increased the $R^{2}$ by adding the multiplicated predictor. 
+```{r}
+#Calculate 95% confidence interval
+confint(model1,conf.level=0.95)
+```
+##Hypothesis Test about Ozone value
+H0:Value of Ozone in population is >=50
+H1:Value of Ozone in population is <50
+```{r}
+newdata<-mydata[(1)]
+t.test(newdata,alternative="less",mu=50)
+```
+Since P-value 0.006919 is less than alpha=0.05, we should reject the null hypothesis. The Ozone value in population should be less then 50.
+
+
+
+

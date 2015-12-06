@@ -7,7 +7,7 @@ output: word_document
 #Data Analysis about Ozone Data
 ##Read the data
 ```{r}
-setwd(setwd("/Users/Gracie/Dropbox/BigData"))
+setwd("/Users/Gracie/Desktop/BigData")
 mydata<-read.csv("ozone_data.csv")
 ```
 ##Create Linear Regression Model 

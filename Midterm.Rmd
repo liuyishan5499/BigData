@@ -1,0 +1,28 @@
+---
+title: "Midterm"
+author: "Yishan Liu"
+date: "November 7, 2015"
+output: word_document
+---
+#Title about the paper
+##Step 1: Read the data
+```{r}
+setwd("/Users/Gracie/Desktop/BigData")
+mydata<-read.csv("ozone_data.csv")
+```
+##Step 2: linear regression
+```{r}
+model<-lm(Ozone~Temp+Wind,data=mydata)
+summary(model)
+```
+Summary:1.model 2.R square
+##Step 3: Correlation Plot and Pearson's correlation coefficient
+```{r}
+pairs(mydata)
+cor(mydata)
+```
+Analyze the plot and pearson cc, try new model and see the result
+##Step 4:Confidence interval
+```{r}
+confint(model,level=0.95)
+```
